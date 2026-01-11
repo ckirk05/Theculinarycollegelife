@@ -1,5 +1,5 @@
 import { getAllRecipes } from '@/lib/content'
-import RecipeGrid from '@/components/recipe/RecipeGrid'
+import RecipesWithFilters from '@/components/recipe/RecipesWithFilters'
 
 export const metadata = {
   title: 'All Recipes',
@@ -20,7 +20,7 @@ export default function RecipesPage() {
         </p>
       </header>
 
-      <RecipeGrid recipes={recipes} />
+      <RecipesWithFilters recipes={recipes} />
     </div>
   )
 }

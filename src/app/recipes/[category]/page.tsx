@@ -1,5 +1,5 @@
 import { getRecipesByCategory } from '@/lib/content'
-import RecipeGrid from '@/components/recipe/RecipeGrid'
+import RecipesWithFilters from '@/components/recipe/RecipesWithFilters'
 import { RecipeCategory } from '@/types/recipe'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -84,10 +84,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </p>
       </header>
 
-      <RecipeGrid
-        recipes={recipes}
-        emptyMessage={`No ${category} recipes yet. Check back soon!`}
-      />
+      <RecipesWithFilters recipes={recipes} />
     </div>
   )
 }

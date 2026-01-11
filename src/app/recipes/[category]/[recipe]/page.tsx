@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getAllRecipes, getRecipeBySlug } from '@/lib/content'
 import RecipeDetail from '@/components/recipe/RecipeDetail'
+import RecipeViewTracker from '@/components/recipe/RecipeViewTracker'
 import type { Metadata } from 'next'
 
 interface RecipePageProps {
@@ -80,9 +81,11 @@ export default async function RecipePage({ params }: RecipePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <RecipeDetail recipe={recipe} renderedContent={content} />
-      </div>
+      <RecipeViewTracker recipe={recipe}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <RecipeDetail recipe={recipe} renderedContent={content} />
+        </div>
+      </RecipeViewTracker>
     </>
   )
 }
