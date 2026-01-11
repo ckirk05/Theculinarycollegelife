@@ -72,8 +72,8 @@ export default function Navigation() {
           Lifestyle
         </Link>
 
-        <Link href="/gallery" className={navLinkClass('/gallery')}>
-          Gallery
+        <Link href="/about" className={navLinkClass('/about')}>
+          About
         </Link>
       </div>
 
@@ -142,11 +142,11 @@ export default function Navigation() {
             Lifestyle
           </Link>
           <Link
-            href="/gallery"
+            href="/about"
             className="block px-4 py-2 hover:bg-butter-50 text-gray-700"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Gallery
+            About
           </Link>
         </div>
       )}
