@@ -18,28 +18,14 @@ function getSecretKey() {
 }
 
 /**
- * Verify the provided password against the stored hash or plain password
+ * Verify the provided password
+ * CHANGE YOUR PASSWORD HERE - edit the line below:
  */
+const HARDCODED_PASSWORD = '4034FrozenYogurt'
+
 export async function verifyPassword(password: string): Promise<boolean> {
-  // Check if plain password is set (easier for deployment)
-  const plainPassword = process.env.ADMIN_PASSWORD
-  if (plainPassword) {
-    return password === plainPassword
-  }
-
-  // Fallback to hash-based authentication
-  const storedHash = process.env.ADMIN_PASSWORD_HASH
-  if (!storedHash) {
-    console.error('Neither ADMIN_PASSWORD nor ADMIN_PASSWORD_HASH found in environment variables')
-    return false
-  }
-
-  try {
-    return await bcrypt.compare(password, storedHash)
-  } catch (error) {
-    console.error('Password verification error:', error)
-    return false
-  }
+  // Simple password check - edit HARDCODED_PASSWORD above to change it
+  return password === HARDCODED_PASSWORD
 }
 
 /**
