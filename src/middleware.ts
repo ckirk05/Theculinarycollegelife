@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { isAuthenticated } from '@/lib/auth'
+import { isAuthenticatedEdge } from '@/lib/auth-edge'
 
 export async function middleware(request: NextRequest) {
   try {
@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
     }
 
     // Check authentication for all other admin routes
-    const authenticated = await isAuthenticated(request)
+    const authenticated = await isAuthenticatedEdge(request)
 
     if (!authenticated) {
       // Redirect to login page
