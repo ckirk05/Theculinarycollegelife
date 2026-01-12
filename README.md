@@ -6,6 +6,8 @@ A beautiful, modern food and lifestyle blog built with Next.js 15, featuring rec
 
 - **Recipe Management**: 12 delicious recipes across 6 categories (breakfast, lunch, dinner, snack, dessert, drinks)
 - **Lifestyle Blog**: 5 engaging blog posts about cooking, meal prep, and college life
+- **Admin CMS**: Password-protected admin panel for uploading recipes and blog posts
+- **Image Upload**: Drag-and-drop image upload with preview
 - **Search Functionality**: Full-text search across recipes and blog posts using Fuse.js
 - **Responsive Design**: Mobile-first design that looks great on all devices
 - **SEO Optimized**: Structured data, meta tags, and Open Graph support
@@ -53,6 +55,70 @@ npm run build
 npm start
 ```
 
+## 🔐 Admin CMS Setup
+
+The website includes a password-protected CMS for uploading recipes and blog posts.
+
+### Setting Up the CMS
+
+1. Generate a password hash for your admin password:
+
+```bash
+node -e "const bcrypt = require('bcrypt'); bcrypt.hash('your-password', 10).then(hash => console.log(hash))"
+```
+
+2. Create a `.env.local` file in the project root:
+
+```env
+ADMIN_PASSWORD_HASH=<paste-your-hash-here>
+SESSION_SECRET=<random-32-character-string>
+NODE_ENV=development
+```
+
+3. Restart your development server
+
+### Using the CMS
+
+1. Navigate to `/admin` to access the login page
+2. Enter your password to log in
+3. From the dashboard, choose:
+   - **Upload Recipe** - Add a new recipe with images, ingredients, and instructions
+   - **Upload Blog Post** - Create a lifestyle blog post
+
+### Features
+
+- **Recipe Upload Form**:
+  - Title, description, and category selection
+  - Prep time, cook time, servings, and difficulty
+  - Image upload (drag & drop or browse)
+  - Tag selection with autocomplete
+  - Dynamic ingredients list
+  - Markdown editor for instructions
+
+- **Blog Post Upload Form**:
+  - Title, description, and author
+  - Featured image upload
+  - Tag selection
+  - Markdown editor for content
+
+- **Security**:
+  - Password-protected with bcrypt hashing
+  - HTTP-only session cookies
+  - Protected routes with middleware
+
+### Important: Development Only
+
+The CMS currently works in **local development only**. Vercel's serverless environment has a read-only file system, so uploaded content cannot be saved in production.
+
+**Production Workflow**:
+1. Use the CMS locally to create recipes and blog posts
+2. Files are saved to `content/` and `public/` directories
+3. Commit the new content to git
+4. Push to GitHub
+5. Vercel auto-deploys with the new content
+
+**Future Enhancement**: Consider GitHub API integration to enable remote content creation that triggers automatic rebuilds.
+
 ## 📁 Project Structure
 
 ```
@@ -73,17 +139,27 @@ theculinarycollegelife/
 │       └── gallery/
 ├── src/
 │   ├── app/                   # Next.js app router pages
+│   │   ├── admin/            # Admin CMS pages
+│   │   │   ├── dashboard/   # Admin dashboard
+│   │   │   └── upload/      # Upload forms
+│   │   └── api/              # API routes
+│   │       ├── auth/        # Authentication endpoints
+│   │       └── upload/      # Upload handlers
 │   ├── components/            # React components
-│   │   ├── layout/           # Header, Footer, Navigation
-│   │   ├── recipe/           # Recipe-specific components
-│   │   ├── lifestyle/        # Blog post components
-│   │   └── ui/               # Reusable UI components
+│   │   ├── admin/           # Admin CMS components
+│   │   ├── layout/          # Header, Footer, Navigation
+│   │   ├── recipe/          # Recipe-specific components
+│   │   ├── lifestyle/       # Blog post components
+│   │   └── ui/              # Reusable UI components
 │   ├── lib/                   # Utility functions
-│   │   ├── content.ts        # Content fetching
-│   │   ├── search.ts         # Search implementation
-│   │   └── filters.ts        # Filtering logic
+│   │   ├── auth.ts          # Authentication logic
+│   │   ├── cms.ts           # CMS utilities
+│   │   ├── content.ts       # Content fetching
+│   │   ├── search.ts        # Search implementation
+│   │   └── filters.ts       # Filtering logic
 │   ├── types/                 # TypeScript type definitions
-│   └── styles/                # Global styles
+│   ├── styles/                # Global styles
+│   └── middleware.ts          # Route protection
 ├── tailwind.config.ts         # Tailwind configuration
 ├── next.config.js             # Next.js configuration
 └── package.json
@@ -91,7 +167,18 @@ theculinarycollegelife/
 
 ## 📝 Adding Content
 
-### Adding a Recipe
+You can add content in two ways:
+
+### Option 1: Using the Admin CMS (Recommended)
+
+1. Set up the CMS following the instructions above
+2. Navigate to `/admin` and log in
+3. Use the upload forms to create recipes or blog posts
+4. Content is automatically saved with proper formatting
+
+### Option 2: Manual File Creation
+
+#### Adding a Recipe
 
 1. Create a new `.md` file in `content/recipes/[category]/`
 2. Use this frontmatter template:
@@ -142,6 +229,7 @@ Write your blog post content here...
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Content**: Markdown with gray-matter and next-mdx-remote
+- **Authentication**: bcrypt and jose (JWT)
 - **Search**: Fuse.js
 - **Date Handling**: date-fns
 - **Fonts**: Google Fonts (Inter, Playfair Display)
@@ -155,6 +243,7 @@ Write your blog post content here...
 
 ## 🌐 Pages
 
+### Public Pages
 - **Homepage** (`/`) - Hero section, featured recipes, category grid
 - **All Recipes** (`/recipes`) - Grid of all recipes
 - **Recipe Category** (`/recipes/[category]`) - Recipes filtered by category
@@ -163,6 +252,12 @@ Write your blog post content here...
 - **Blog Post** (`/lifestyle/[slug]`) - Individual blog post
 - **Search** (`/search`) - Search results page
 - **Gallery** (`/gallery`) - Photo gallery
+
+### Admin Pages (Protected)
+- **Admin Login** (`/admin`) - Password authentication
+- **Dashboard** (`/admin/dashboard`) - Upload options
+- **Upload Recipe** (`/admin/upload/recipe`) - Recipe creation form
+- **Upload Blog Post** (`/admin/upload/blog`) - Blog post creation form
 
 ## 📊 Content Overview
 
