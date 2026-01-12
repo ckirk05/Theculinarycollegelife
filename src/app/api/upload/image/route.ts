@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import path from 'path'
-import { existsSync } from 'fs'
+import { v2 as cloudinary } from 'cloudinary'
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 // Helper to generate slug from filename
 function generateSlug(filename: string): string {
@@ -50,33 +55,35 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Generate unique filename
+    // Generate unique public ID
     const slug = generateSlug(file.name)
     const timestamp = Date.now()
-    const extension = file.name.split('.').pop()
-    const filename = `${slug}-${timestamp}.${extension}`
+    const publicId = `culinary-college/${category}/${slug}-${timestamp}`
 
-    // Determine directory path
-    const uploadDir = path.join(process.cwd(), 'public', 'images', category)
-
-    // Ensure directory exists
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true })
-    }
-
-    // Convert file to buffer and save
+    // Convert file to buffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    const filepath = path.join(uploadDir, filename)
 
-    await writeFile(filepath, buffer)
+    // Upload to Cloudinary
+    const result = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          public_id: publicId,
+          folder: `culinary-college/${category}`,
+          resource_type: 'image',
+        },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        }
+      )
+      uploadStream.end(buffer)
+    })
 
-    // Return public path
-    const publicPath = `/images/${category}/${filename}`
-
+    // Return Cloudinary URL
     return NextResponse.json({
       success: true,
-      path: publicPath,
+      path: result.secure_url,
     })
   } catch (error) {
     console.error('Image upload error:', error)
