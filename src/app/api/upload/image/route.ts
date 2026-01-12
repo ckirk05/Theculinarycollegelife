@@ -2,11 +2,19 @@ import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 
 // Configure Cloudinary
-cloudinary.config({
+const cloudinaryConfig = {
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
+}
+
+console.log('Cloudinary config:', {
+  cloud_name: cloudinaryConfig.cloud_name,
+  api_key: cloudinaryConfig.api_key ? '***exists***' : 'MISSING',
+  api_secret: cloudinaryConfig.api_secret ? '***exists***' : 'MISSING',
 })
+
+cloudinary.config(cloudinaryConfig)
 
 // Helper to generate slug from filename
 function generateSlug(filename: string): string {
