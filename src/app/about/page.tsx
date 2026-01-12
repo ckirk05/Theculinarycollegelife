@@ -27,14 +27,14 @@ export default function AboutPage() {
         </div>
 
         <h2 className="font-display text-3xl font-bold mb-4 text-gray-900">
-          Hi, I'm [Your Name]!
+          Hi, I&apos;m [Your Name]!
         </h2>
 
         <p className="text-gray-700 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. I'm a college student with a passion
+          incididunt ut labore et dolore magna aliqua. I&apos;m a college student with a passion
           for cooking, sharing delicious recipes, and making the most of life in the kitchen.
-          This blog is my creative outlet where I share everything I've learned about cooking
+          This blog is my creative outlet where I share everything I&apos;ve learned about cooking
           on a budget, meal prepping, and creating food that actually tastes amazing.
         </p>
 
@@ -45,19 +45,19 @@ export default function AboutPage() {
         <p className="text-gray-700 mb-6">
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
           ex ea commodo consequat. I started cooking in my dorm room with nothing but a
-          microwave and determination. Fast forward to today, and I've learned that you don't
+          microwave and determination. Fast forward to today, and I&apos;ve learned that you don&apos;t
           need a fancy kitchen or expensive ingredients to make incredible food. My journey
           has been full of kitchen disasters, happy accidents, and most importantly, delicious
-          discoveries that I can't wait to share with you.
+          discoveries that I can&apos;t wait to share with you.
         </p>
 
         <h3 className="font-display text-2xl font-bold mb-4 text-gray-900">
-          What You'll Find Here
+          What You&apos;ll Find Here
         </h3>
 
         <p className="text-gray-700 mb-4">
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. On this blog, you'll discover:
+          fugiat nulla pariatur. On this blog, you&apos;ll discover:
         </p>
 
         <ul className="list-disc pl-6 mb-6 text-gray-700">
@@ -75,10 +75,10 @@ export default function AboutPage() {
         <p className="text-gray-700 mb-6">
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
           mollit anim id est laborum. I believe that cooking should be fun, accessible, and
-          stress-free. You don't need to be a professional chef or have years of experience
-          to create meals you're proud of. My recipes focus on simple techniques, affordable
+          stress-free. You don&apos;t need to be a professional chef or have years of experience
+          to create meals you&apos;re proud of. My recipes focus on simple techniques, affordable
           ingredients, and most importantly - flavor! Every recipe I share has been tested
-          multiple times in my own kitchen, and I only post what I'd actually make again.
+          multiple times in my own kitchen, and I only post what I&apos;d actually make again.
         </p>
 
         <h3 className="font-display text-2xl font-bold mb-4 text-gray-900">
@@ -87,34 +87,34 @@ export default function AboutPage() {
 
         <p className="text-gray-700 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. When I'm not cooking or blogging,
+          incididunt ut labore et dolore magna aliqua. When I&apos;m not cooking or blogging,
           you can find me exploring local farmers markets, trying new restaurants, studying
           for my degree in [Your Major], hanging out with friends, or planning my next
-          culinary adventure. I love connecting with fellow food lovers, so don't hesitate
+          culinary adventure. I love connecting with fellow food lovers, so don&apos;t hesitate
           to reach out!
         </p>
 
         <h3 className="font-display text-2xl font-bold mb-4 text-gray-900">
-          Let's Connect!
+          Let&apos;s Connect!
         </h3>
 
         <p className="text-gray-700 mb-6">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. I'd love to
-          hear from you! Whether you've tried one of my recipes, have questions, or just
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. I&apos;d love to
+          hear from you! Whether you&apos;ve tried one of my recipes, have questions, or just
           want to chat about food, feel free to reach out. Your feedback and suggestions
           help make this blog better, and I genuinely appreciate every message I receive.
         </p>
 
         <div className="bg-butter-50 rounded-xl p-6 mb-8">
           <p className="text-gray-700 italic">
-            "Cooking is like love. It should be entered into with abandon or not at all."
+            &quot;Cooking is like love. It should be entered into with abandon or not at all.&quot;
             - Harriet Van Horne
           </p>
         </div>
 
         <p className="text-gray-700">
           Thank you for being here and being part of The Culinary College Life community.
-          I can't wait to share more recipes, tips, and stories with you. Happy cooking!
+          I can&apos;t wait to share more recipes, tips, and stories with you. Happy cooking!
         </p>
 
         <p className="text-gray-700 mt-6 font-semibold">
