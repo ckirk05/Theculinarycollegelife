@@ -18,13 +18,19 @@ function getSecretKey() {
 }
 
 /**
- * Verify the provided password against the stored hash
+ * Verify the provided password against the stored hash or plain password
  */
 export async function verifyPassword(password: string): Promise<boolean> {
-  const storedHash = process.env.ADMIN_PASSWORD_HASH
+  // Check if plain password is set (easier for deployment)
+  const plainPassword = process.env.ADMIN_PASSWORD
+  if (plainPassword) {
+    return password === plainPassword
+  }
 
+  // Fallback to hash-based authentication
+  const storedHash = process.env.ADMIN_PASSWORD_HASH
   if (!storedHash) {
-    console.error('ADMIN_PASSWORD_HASH not found in environment variables')
+    console.error('Neither ADMIN_PASSWORD nor ADMIN_PASSWORD_HASH found in environment variables')
     return false
   }
 
