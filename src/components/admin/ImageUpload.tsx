@@ -49,7 +49,9 @@ export default function ImageUpload({ category, onUploadComplete, currentImage }
         body: formData,
       })
 
+      console.log('Upload response status:', response.status)
       const data = await response.json()
+      console.log('Upload response data:', data)
 
       if (data.success) {
         onUploadComplete(data.path)
@@ -58,6 +60,7 @@ export default function ImageUpload({ category, onUploadComplete, currentImage }
         setPreview(null)
       }
     } catch (err) {
+      console.error('Upload error:', err)
       setError('Upload failed. Please try again.')
       setPreview(null)
     } finally {
